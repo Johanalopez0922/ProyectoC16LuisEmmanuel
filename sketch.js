@@ -21,7 +21,6 @@ function preload(){
 }
 
 
-
 function setup() {
   createCanvas(400, 400);
   
@@ -43,8 +42,7 @@ function setup() {
   greenB = new Group();
   pinkB = new Group();
  
-  arrowGroup = new Group();
-  
+  arrowGroup = new Group();  
 }
 
 function draw(){
@@ -88,7 +86,11 @@ function draw(){
   }
     
     //explotar globos y elegir un grupo para terminar el juego 
-    if(arrowGroup.isTouching(redB)){
+
+    /*LUIS EMANUEL, COMO ESTAMOS COMPARANDO LA COLISIÓN ENTRE 2 GRUPOS NO IMPORTA EL ORDEN
+    ADEMÁS VAMOS A USAR LA FUNCION destroyEach(), para destruir cada uno de los elementos del grupo*/
+
+    if(redB.isTouching(arrowGroup)){
       redB.destroyEach(); 
       gameState = END; 
     }
@@ -98,10 +100,10 @@ function draw(){
       blueB.destroyEach();
       arrowGroup.destroyEach(); 
     }  
-   
- }
 
-  if (gameState === END) {      
+    //AGREGA LAS DEMÁS CONDICIONES PARA LOS GLOBOS QUE NOS FALTAN
+   
+  }else if (gameState === END) {      
     bow.destroy();      
     scene.velocityX = 0;
   }
@@ -114,7 +116,7 @@ function draw(){
    pink.lifetime = 0;
    gameState = END; 
    LUIS EMMANUEL, ESTO ESTABA CAUSANDO EL 
-   OVERLAP PORQUE LA CONDICIÓN NUNCA SE VA A DETENER 
+   OVERLAP PORQUE LA CONDICIÓN NUNCA SE VA A DETENER EN LA SIGUIENTE CLASE VEMOS COMO CAMBIAR EL LIFETIME 
  }*/
 
   drawSprites();
